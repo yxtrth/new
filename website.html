@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - E-Commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-indigo-600">ShopEasy</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="text-gray-600 hover:text-indigo-600">Home</a></li>
+                    <li><a href="#products" class="text-gray-600 hover:text-indigo-600">Products</a></li>
+                    <li><a href="#about" class="text-gray-600 hover:text-indigo-600">About</a></li>
+                    <li><button id="cartButton" class="relative flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </button></li>
+                    <li>
+                        <button id="loginBtn" class="text-gray-600 hover:text-indigo-600 mr-2">Login</button>
+                        <button id="signupBtn" class="text-gray-600 hover:text-indigo-600">Signup</button>
+                    </li>
+                    <li id="orderHistoryNav" style="display:none"><button class="text-gray-600 hover:text-indigo-600">Order History</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-indigo-600 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Welcome to ShopEasy</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Your one-stop shop for quality products at affordable prices</p>
+            <a href="#products" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Featured Products</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product Card 1 -->
+                <div class="product-card bg-gradient-to-br from-indigo-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-indigo-200">
+                    <img src="https://images.unsplash.com/photo-1513708927688-890a1c7b6b8a?auto=format&fit=crop&w=400&q=80" alt="Smartphone" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Smartphone Pro X</h3>
+                        <p class="text-gray-600 mb-4">Latest smartphone with advanced camera and long battery life.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-indigo-600">$699.99</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="product-card bg-gradient-to-br from-pink-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-pink-200">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Headphones" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Wireless Headphones</h3>
+                        <p class="text-gray-600 mb-4">Noise-cancelling headphones with 30-hour battery life.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-pink-600">$199.99</span>
+                            <button class="bg-pink-600 text-white px-4 py-2 rounded-lg shadow hover:bg-pink-700 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="product-card bg-gradient-to-br from-green-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-green-200">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Smartwatch" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Fitness Smartwatch</h3>
+                        <p class="text-gray-600 mb-4">Track your health and stay connected on the go.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-green-600">$249.99</span>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 4 -->
+                <div class="product-card bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-yellow-200">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Laptop" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">UltraBook Laptop</h3>
+                        <p class="text-gray-600 mb-4">Lightweight and powerful laptop for work and play.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-yellow-600">$899.99</span>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 5 -->
+                <div class="product-card bg-gradient-to-br from-blue-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-blue-200">
+                    <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=80" alt="Speaker" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Portable Bluetooth Speaker</h3>
+                        <p class="text-gray-600 mb-4">Rich sound with 20-hour battery and waterproof design.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-blue-600">$129.99</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 6 -->
+                <div class="product-card bg-gradient-to-br from-purple-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-purple-200">
+                    <img src="https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=400&q=80" alt="Camera" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">DSLR Camera</h3>
+                        <p class="text-gray-600 mb-4">Capture stunning photos with this professional camera.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-purple-600">$499.99</span>
+                            <button class="bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-700 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 7 -->
+                <div class="product-card bg-gradient-to-br from-red-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-red-200">
+                    <img src="https://images.unsplash.com/photo-1512499617640-c2f999098c01?auto=format&fit=crop&w=400&q=80" alt="Tablet" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Tablet Max 10"</h3>
+                        <p class="text-gray-600 mb-4">Sleek 10-inch tablet for work, play, and creativity.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-red-600">$349.99</span>
+                            <button class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 8 -->
+                <div class="product-card bg-gradient-to-br from-teal-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-teal-200">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Smart Home Hub" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Smart Home Hub</h3>
+                        <p class="text-gray-600 mb-4">Control your home with voice and automation features.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-teal-600">$159.99</span>
+                            <button class="bg-teal-600 text-white px-4 py-2 rounded-lg shadow hover:bg-teal-700 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 9 -->
+                <div class="product-card bg-gradient-to-br from-orange-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-orange-200">
+                    <img src="https://images.unsplash.com/photo-1519121784292-39d345e1b4c2?auto=format&fit=crop&w=400&q=80" alt="Gaming Console" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Gaming Console Z</h3>
+                        <p class="text-gray-600 mb-4">Next-gen gaming with ultra-fast graphics and storage.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-orange-600">$599.99</span>
+                            <button class="bg-orange-500 text-white px-4 py-2 rounded-lg shadow hover:bg-orange-600 transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">About ShopEasy</h2>
+                <p class="text-gray-600 mb-6">
+                    ShopEasy was founded in 2023 with a simple mission: to provide customers with high-quality products at fair prices with exceptional service.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal (Static Example) -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl overflow-y-auto">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-xl font-bold">Your Cart</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-4">
+                <p class="text-gray-500 text-center py-8">Your cart is empty</p>
+            </div>
+            <div class="p-4 border-t">
+                <div class="flex justify-between mb-4">
+                    <span class="font-bold">Subtotal:</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <button class="w-full bg-indigo-600 text-white py-3 rounded hover:bg-indigo-700 transition">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal (Static Example) -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl overflow-y-auto">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-xl font-bold">Checkout</h3>
+                <button id="closeCheckout" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form class="p-4">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="fullName">Full Name</label>
+                    <input type="text" id="fullName" class="w-full px-3 py-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="email">Email</label>
+                    <input type="email" id="email" class="w-full px-3 py-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="address">Shipping Address</label>
+                    <textarea id="address" rows="3" class="w-full px-3 py-2 border rounded" required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded hover:bg-indigo-700 transition">Complete Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Login</h3>
+                    <button id="closeLogin" class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" class="w-full px-3 py-2 border rounded" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="w-full px-3 py-2 border rounded" required>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Create Account</h3>
+                    <button id="closeSignup" class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="signupForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="signupName">Full Name</label>
+                        <input type="text" id="signupName" class="w-full px-3 py-2 border rounded" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" class="w-full px-3 py-2 border rounded" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2" for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" class="w-full px-3 py-2 border rounded" required>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order History Modal -->
+    <div id="orderHistoryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded-lg p-6 max-w-2xl w-full shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Order History</h3>
+                    <button id="closeOrderHistory" class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="orderHistoryContent">
+                    <p class="text-gray-500 text-center py-8">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // --- Supabase Auth Setup ---
+    const supabaseUrl = 'https://rgknvxnxmjpztmhypvqq.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJna252eG54bWpwenRtaHlwdnFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4ODY5MTcsImV4cCI6MjA2NzQ2MjkxN30.e1NnU6GbNfFWL3V1q6ImfyBWbpv7jk44A3TiiKtzJe8';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Modal logic for login/signup
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const loginModal = document.getElementById('loginModal');
+    const signupModal = document.getElementById('signupModal');
+    const closeLogin = document.getElementById('closeLogin');
+    const closeSignup = document.getElementById('closeSignup');
+
+    loginBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+    signupBtn.addEventListener('click', () => signupModal.classList.remove('hidden'));
+    closeLogin.addEventListener('click', () => loginModal.classList.add('hidden'));
+    closeSignup.addEventListener('click', () => signupModal.classList.add('hidden'));
+    loginModal.addEventListener('click', e => { if (e.target === loginModal) loginModal.classList.add('hidden'); });
+    signupModal.addEventListener('click', e => { if (e.target === signupModal) signupModal.classList.add('hidden'); });
+
+    // --- Auth Logic ---
+    let currentUser = null;
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const authHeader = document.createElement('li');
+    const navList = document.querySelector('nav ul');
+    const orderHistoryNav = document.getElementById('orderHistoryNav');
+    orderHistoryNav.addEventListener('click', showOrderHistory);
+
+    // Signup
+    signupForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: { name }
+            }
+        });
+        if (error) {
+            alert(error.message);
+            return;
+        }
+        // Defensive: check if data && data.user && data.user.id
+        if (data && data.user && data.user.id) {
+            await supabase.from('profiles').upsert([{ id: data.user.id, name }]);
+        }
+        signupModal.classList.add('hidden');
+        alert('Signup successful! Please check your email to verify your account.');
+    });
+
+    // Login
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+            alert(error.message);
+            return;
+        }
+        // Defensive: check if data && data.user
+        if (data && data.user) {
+            currentUser = data.user;
+            loginModal.classList.add('hidden');
+            updateAuthUI();
+        } else {
+            alert('Login failed. Please try again.');
+        }
+    });
+
+    // Logout
+    function logoutUser() {
+        supabase.auth.signOut();
+        currentUser = null;
+        updateAuthUI();
+    }
+
+    // Update Auth UI
+    function updateAuthUI() {
+        // Remove old auth header if present
+        if (authHeader.parentNode) authHeader.parentNode.removeChild(authHeader);
+        if (currentUser) {
+            authHeader.innerHTML = `<span class="text-gray-600">${currentUser.email}</span> <button id="logoutBtn" class="ml-2 text-gray-600 hover:text-indigo-600">Logout</button>`;
+            navList.appendChild(authHeader);
+            document.getElementById('logoutBtn').onclick = logoutUser;
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+            orderHistoryNav.style.display = '';
+        } else {
+            loginBtn.style.display = '';
+            signupBtn.style.display = '';
+            orderHistoryNav.style.display = 'none';
+        }
+    }
+
+    // On page load, check session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session && session.user) {
+            currentUser = session.user;
+            updateAuthUI();
+        }
+    });
+    // Listen for auth state changes
+    supabase.auth.onAuthStateChange((_event, session) => {
+        if (session && session.user) {
+            currentUser = session.user;
+        } else {
+            currentUser = null;
+        }
+        updateAuthUI();
+    });
+
+    // --- Cart Logic ---
+    let cart = [];
+    const cartButton = document.getElementById('cartButton');
+    const cartModal = document.getElementById('cartModal');
+    const closeCart = document.getElementById('closeCart');
+    const cartCount = document.getElementById('cartCount');
+    const cartSubtotal = document.getElementById('cartSubtotal');
+    const checkoutButton = cartModal.querySelector('button.w-full');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const closeCheckout = document.getElementById('closeCheckout');
+    const checkoutForm = checkoutModal.querySelector('form');
+
+    // Make Proceed to Checkout open the checkout modal
+    checkoutButton.addEventListener('click', () => {
+        cartModal.classList.add('hidden');
+        checkoutModal.classList.remove('hidden');
+    });
+
+    // Show/hide cart modal
+    cartButton.addEventListener('click', () => {
+        renderCart();
+        cartModal.classList.remove('hidden');
+    });
+    closeCart.addEventListener('click', () => cartModal.classList.add('hidden'));
+    cartModal.addEventListener('click', e => { if (e.target === cartModal) cartModal.classList.add('hidden'); });
+
+    // Add to cart buttons
+    document.querySelectorAll('.product-card button').forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.product-card');
+            const name = card.querySelector('h3').textContent;
+            const price = parseFloat(card.querySelector('span.font-bold').textContent.replace('$',''));
+            const image = card.querySelector('img').src;
+            const id = name.replace(/\s+/g, '-').toLowerCase();
+            addToCart({ id, name, price, image });
+        });
+    });
+
+    function addToCart(product) {
+        const found = cart.find(item => item.id === product.id);
+        if (found) {
+            found.qty += 1;
+        } else {
+            cart.push({ ...product, qty: 1 });
+        }
+        updateCartCount();
+        renderCart();
+    }
+
+    function updateCartCount() {
+        const total = cart.reduce((sum, item) => sum + item.qty, 0);
+        cartCount.textContent = total;
+    }
+
+    function renderCart() {
+        const cartItemsDiv = cartModal.querySelector('.p-4');
+        if (cart.length === 0) {
+            cartItemsDiv.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
+            cartSubtotal.textContent = '$0.00';
+            checkoutButton.disabled = true;
+            checkoutButton.classList.add('opacity-50', 'cursor-not-allowed');
+            return;
+        }
+        checkoutButton.disabled = false;
+        checkoutButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        let html = '';
+        let subtotal = 0;
+        cart.forEach(item => {
+            subtotal += item.price * item.qty;
+            html += `
+                <div class="flex items-center justify-between py-2 border-b">
+                    <div class="flex items-center">
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded mr-2">
+                        <div>
+                            <div class="font-medium">${item.name}</div>
+                            <div class="text-sm text-gray-500">$${item.price.toFixed(2)} x ${item.qty}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="text-lg px-2" onclick="window.updateQty('${item.id}',-1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="text-lg px-2" onclick="window.updateQty('${item.id}',1)">+</button>
+                        <button class="text-red-500 ml-2" onclick="window.removeFromCart('${item.id}')">Remove</button>
+                    </div>
+                </div>
+            `;
+        });
+        cartItemsDiv.innerHTML = html;
+        cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    window.updateQty = function(id, change) {
+        const item = cart.find(i => i.id === id);
+        if (!item) return;
+        item.qty += change;
+        if (item.qty <= 0) {
+            cart = cart.filter(i => i.id !== id);
+        }
+        updateCartCount();
+        renderCart();
+    }
+    window.removeFromCart = function(id) {
+        cart = cart.filter(i => i.id !== id);
+        updateCartCount();
+        renderCart();
+    }
+
+    // --- Store Order in Supabase ---
+    async function storeOrder(details, cart) {
+        // details: { fullName, email, address }
+        // cart: array of items
+        const user = currentUser;
+        const order = {
+            user_id: user ? user.id : null,
+            name: details.fullName,
+            email: details.email,
+            address: details.address,
+            items: JSON.stringify(cart),
+            total_amount: cart.reduce((sum, item) => sum + item.price * item.qty, 0), // changed from 'total' to 'total_amount'
+            created_at: new Date().toISOString()
+        };
+        const { error } = await supabase.from('orders').insert([order]);
+        if (error) {
+            alert('Order save failed: ' + error.message);
+        }
+    }
+
+    // --- Checkout logic ---
+    checkoutForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+        // Store order in Supabase
+        await storeOrder({ fullName, email, address }, cart);
+        // Show receipt modal
+        showReceipt();
+        checkoutModal.classList.add('hidden');
+        cart = [];
+        updateCartCount();
+        renderCart();
+    });
+
+    // Receipt modal
+    function showReceipt() {
+        let subtotal = 0;
+        let itemsHtml = cart.map(item => {
+            subtotal += item.price * item.qty;
+            return `<tr><td class='py-1'>${item.name} x${item.qty}</td><td class='py-1 text-right'>$${(item.price*item.qty).toFixed(2)}</td></tr>`;
+        }).join('');
+        const receiptHtml = `
+        <div id="receiptModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full animate__animated animate__fadeIn">
+                <h3 class="text-xl font-bold mb-4 text-center">Order Receipt</h3>
+                <table class="w-full mb-4 text-sm">${itemsHtml}</table>
+                <div class="flex justify-between font-bold border-t pt-2 mb-4">
+                    <span>Total</span><span>$${subtotal.toFixed(2)}</span>
+                </div>
+                <button id="closeReceipt" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">Close</button>
+            </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', receiptHtml);
+        document.getElementById('closeReceipt').onclick = function() {
+            document.getElementById('receiptModal').remove();
+        };
+    }
+
+    // Show/hide Order History modal
+    const orderHistoryModal = document.getElementById('orderHistoryModal');
+    const closeOrderHistory = document.getElementById('closeOrderHistory');
+    closeOrderHistory.addEventListener('click', () => orderHistoryModal.classList.add('hidden'));
+    orderHistoryModal.addEventListener('click', e => { if (e.target === orderHistoryModal) orderHistoryModal.classList.add('hidden'); });
+
+    // Fetch and display order history
+    async function showOrderHistory() {
+        if (!currentUser) return;
+        orderHistoryModal.classList.remove('hidden');
+        const contentDiv = document.getElementById('orderHistoryContent');
+        contentDiv.innerHTML = '<p class="text-gray-500 text-center py-8">Loading...</p>';
+        const { data, error } = await supabase
+            .from('orders')
+            .select('*')
+            .eq('user_id', currentUser.id)
+            .order('created_at', { ascending: false });
+        if (error) {
+            contentDiv.innerHTML = '<p class="text-red-500 text-center py-8">Failed to load order history.</p>';
+            return;
+        }
+        if (!data || data.length === 0) {
+            contentDiv.innerHTML = '<p class="text-gray-500 text-center py-8">No orders found.</p>';
+            return;
+        }
+        let html = '<div class="overflow-x-auto"><table class="min-w-full text-sm"><thead><tr><th class="px-2 py-2 text-left">Date</th><th class="px-2 py-2 text-left">Items</th><th class="px-2 py-2 text-right">Total</th><th class="px-2 py-2 text-left">Address</th></tr></thead><tbody>';
+        data.forEach(order => {
+            const items = JSON.parse(order.items || '[]');
+            const itemsStr = items.map(i => `${i.name} x${i.qty}`).join('<br>');
+            html += `<tr class="border-b"><td class="px-2 py-2">${new Date(order.created_at).toLocaleString()}</td><td class="px-2 py-2">${itemsStr}</td><td class="px-2 py-2 text-right">$${(order.total_amount || order.total || 0).toFixed(2)}</td><td class="px-2 py-2">${order.address || ''}</td></tr>`;
+        });
+        html += '</tbody></table></div>';
+        contentDiv.innerHTML = html;
+    }
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 ShopEasy. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
