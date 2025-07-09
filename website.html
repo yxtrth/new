@@ -7,6 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="webs.css">
+    <style>
+      /* Hide static product grid until dynamic load */
+      #products .products { display: none; }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
@@ -49,116 +54,7 @@
     <section id="products" class="py-12 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Featured Products</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product Card 1 -->
-                <div class="product-card bg-gradient-to-br from-indigo-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-indigo-200">
-                    <img src="https://images.unsplash.com/photo-1513708927688-890a1c7b6b8a?auto=format&fit=crop&w=400&q=80" alt="Smartphone" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Smartphone Pro X</h3>
-                        <p class="text-gray-600 mb-4">Latest smartphone with advanced camera and long battery life.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-indigo-600">$699.99</span>
-                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 2 -->
-                <div class="product-card bg-gradient-to-br from-pink-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-pink-200">
-                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Headphones" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Wireless Headphones</h3>
-                        <p class="text-gray-600 mb-4">Noise-cancelling headphones with 30-hour battery life.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-pink-600">$199.99</span>
-                            <button class="bg-pink-600 text-white px-4 py-2 rounded-lg shadow hover:bg-pink-700 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 3 -->
-                <div class="product-card bg-gradient-to-br from-green-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-green-200">
-                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Smartwatch" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Fitness Smartwatch</h3>
-                        <p class="text-gray-600 mb-4">Track your health and stay connected on the go.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-green-600">$249.99</span>
-                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 4 -->
-                <div class="product-card bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-yellow-200">
-                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Laptop" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">UltraBook Laptop</h3>
-                        <p class="text-gray-600 mb-4">Lightweight and powerful laptop for work and play.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-yellow-600">$899.99</span>
-                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 5 -->
-                <div class="product-card bg-gradient-to-br from-blue-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-blue-200">
-                    <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=80" alt="Speaker" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Portable Bluetooth Speaker</h3>
-                        <p class="text-gray-600 mb-4">Rich sound with 20-hour battery and waterproof design.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-blue-600">$129.99</span>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 6 -->
-                <div class="product-card bg-gradient-to-br from-purple-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-purple-200">
-                    <img src="https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=400&q=80" alt="Camera" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">DSLR Camera</h3>
-                        <p class="text-gray-600 mb-4">Capture stunning photos with this professional camera.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-purple-600">$499.99</span>
-                            <button class="bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-700 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 7 -->
-                <div class="product-card bg-gradient-to-br from-red-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-red-200">
-                    <img src="https://images.unsplash.com/photo-1512499617640-c2f999098c01?auto=format&fit=crop&w=400&q=80" alt="Tablet" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Tablet Max 10"</h3>
-                        <p class="text-gray-600 mb-4">Sleek 10-inch tablet for work, play, and creativity.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-red-600">$349.99</span>
-                            <button class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 8 -->
-                <div class="product-card bg-gradient-to-br from-teal-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-teal-200">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Smart Home Hub" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Smart Home Hub</h3>
-                        <p class="text-gray-600 mb-4">Control your home with voice and automation features.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-teal-600">$159.99</span>
-                            <button class="bg-teal-600 text-white px-4 py-2 rounded-lg shadow hover:bg-teal-700 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Card 9 -->
-                <div class="product-card bg-gradient-to-br from-orange-100 to-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 border-2 border-orange-200">
-                    <img src="https://images.unsplash.com/photo-1519121784292-39d345e1b4c2?auto=format&fit=crop&w=400&q=80" alt="Gaming Console" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Gaming Console Z</h3>
-                        <p class="text-gray-600 mb-4">Next-gen gaming with ultra-fast graphics and storage.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-orange-600">$599.99</span>
-                            <button class="bg-orange-500 text-white px-4 py-2 rounded-lg shadow hover:bg-orange-600 transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="productGrid" class="products"></div>
         </div>
     </section>
 
@@ -622,6 +518,80 @@
         html += '</tbody></table></div>';
         contentDiv.innerHTML = html;
     }
+
+    // --- Dynamic Product Loading from Supabase ---
+    const productGrid = document.getElementById('productGrid');
+    async function loadProducts() {
+        // Show shimmer placeholders
+        productGrid.innerHTML = Array(6).fill('').map(() => `<div class="product-shimmer"></div>`).join('');
+        productGrid.style.display = '';
+        // Fetch products from Supabase
+        const { data, error } = await supabase.from('products').select('*').order('id');
+        if (error || !data) {
+            productGrid.innerHTML = '<p class="text-red-500 text-center py-8">Failed to load products.</p>';
+            return;
+        }
+        // Render products
+        productGrid.innerHTML = data.map(product => `
+            <div class="product-card">
+                <img src="${product.image_url || 'https://placehold.co/400x300'}" alt="${product.name}" class="product-image" loading="lazy">
+                <div class="product-info">
+                    <div class="product-title">${product.name}</div>
+                    <div class="product-desc">${product.description || ''}</div>
+                    <div class="product-price">$${Number(product.price).toFixed(2)}</div>
+                    <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+                    <button class="quick-view-btn mt-2" data-id="${product.id}">Quick View</button>
+                </div>
+            </div>
+        `).join('');
+        // Add event listeners for Add to Cart and Quick View
+        productGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                const product = data.find(p => p.id == id);
+                addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: Number(product.price),
+                    image: product.image_url || 'https://placehold.co/400x300'
+                });
+            });
+        });
+        productGrid.querySelectorAll('.quick-view-btn').forEach(btn => {
+            btn.addEventListener('click', () => showQuickView(data.find(p => p.id == btn.getAttribute('data-id'))));
+        });
+    }
+    // Quick View Modal
+    function showQuickView(product) {
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.tabIndex = 0;
+        modal.innerHTML = `
+            <div class="quick-view-modal animate-popIn">
+                <button class="close-btn" style="position:absolute;top:1rem;right:1rem;">&times;</button>
+                <img src="${product.image_url || 'https://placehold.co/400x300'}" alt="${product.name}" class="quick-view-img">
+                <div class="quick-view-title">${product.name}</div>
+                <div class="quick-view-desc">${product.description || ''}</div>
+                <div class="quick-view-price">$${Number(product.price).toFixed(2)}</div>
+                <button class="quick-view-btn" onclick="window.addToCartFromQuickView(${product.id})">Add to Cart</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        modal.focus();
+        modal.querySelector('.close-btn').onclick = () => modal.remove();
+        modal.onclick = e => { if (e.target === modal) modal.remove(); };
+        window.addToCartFromQuickView = function(id) {
+            addToCart({
+                id: product.id,
+                name: product.name,
+                price: Number(product.price),
+                image: product.image_url || 'https://placehold.co/400x300'
+            });
+            modal.remove();
+        };
+    }
+    // Load products on page load
+    loadProducts();
     </script>
 
     <!-- Footer -->
